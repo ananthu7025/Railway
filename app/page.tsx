@@ -12,8 +12,7 @@ import {
   TrainFront,
   CloudRain,
 } from "lucide-react";
-import TrainStatus from "@/components/LiveStation";
-import TrainInfoSearch from "@/components/LiveStation";
+import TrainInfoDrawer from "@/components/TrainInfoModal";
 
 interface SoundCardProps {
   label: string;
@@ -65,6 +64,7 @@ const SoundBoard = () => {
   const [isTrainPlaying, setIsTrainPlaying] = useState(false);
   const [isCrowdPlaying, setIsCrowdPlaying] = useState(false);
   const [isMusicPlaying, setIsMusicPlaying] = useState(true);
+  const [showTrainModal, setShowTrainModal] = useState(false);
 
   const [rainVolume, setRainVolume] = useState(40);
   const [trainVolume, setTrainVolume] = useState(20);
@@ -92,12 +92,19 @@ const SoundBoard = () => {
     />
   ))}
 </div>
-{Math.random() < 0.02 && <div className="lightning-flash" />}
+<div className="absolute top-6 right-6">
+  <button
+    onClick={() => setShowTrainModal(true)}
+    className="bg-yellow-400 text-black px-4 py-2 rounded-full hover:bg-yellow-500 shadow-md"
+  >
+    Know Your Train
+  </button>
+  
+</div>
 
       <h1 className="text-3xl md:text-5xl font-semibold text-center mb-12 text-yellow-100">
         മഴയത്ത് ഒരു ട്രെയിൻ യാത്ര...
       </h1>
-  {/* <TrainInfoSearch/> */}
       {/* Audio Players */}
       <ReactHowler
         src="/sounds/rain.mp3"
@@ -157,7 +164,10 @@ const SoundBoard = () => {
           onToggle={() => setIsCrowdPlaying((prev) => !prev)}
           onVolumeChange={(value) => setCrowdVolume(value)}
         />
+        
       </div>
+    <TrainInfoDrawer isOpen={showTrainModal} onClose={() => setShowTrainModal(false)} />
+
     </div>
   );
 };

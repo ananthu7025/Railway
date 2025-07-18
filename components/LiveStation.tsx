@@ -38,43 +38,39 @@ const TrainInfoSearch = () => {
   };
 
   return (
-    <div style={{ maxWidth: 600, margin: "auto", padding: 20, fontFamily: "Arial" }}>
-      <h2>🚆 Train Information</h2>
-      <input
-        type="text"
-        placeholder="Enter Train Number"
-        value={trainNo}
-        onChange={(e) => setTrainNo(e.target.value)}
-        style={{ padding: 10, width: "100%", marginBottom: 10 }}
-      />
-      <button onClick={fetchTrainInfo} style={{ padding: "10px 20px" }}>
-        Search
-      </button>
+<div className="max-w-xl mx-auto p-4 font-sans">
+  <input
+    type="text"
+    placeholder="Enter Train Number"
+    value={trainNo}
+    onChange={(e) => setTrainNo(e.target.value)}
+    className="w-full p-3 rounded-md border border-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-500 mb-4"
+  />
+  <button
+    onClick={fetchTrainInfo}
+    className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-6 py-2 rounded-full"
+  >
+    Search
+  </button>
 
-      {loading && <p>Loading...</p>}
-      {error && <p style={{ color: "red" }}>{error}</p>}
+  {loading && <p className="text-yellow-600 mt-4">Loading...</p>}
+  {error && <p className="text-red-600 mt-4">{error}</p>}
 
-      {trainInfo && (
-        <div
-          style={{
-            marginTop: 20,
-            padding: 15,
-            borderRadius: 8,
-            boxShadow: "0 0 10px rgba(0,0,0,0.1)",
-          }}
-        >
-          <h3>
-            {trainInfo.TrainName} ({trainInfo.TrainNo})
-          </h3>
-          <p>
-            <strong>From:</strong> {trainInfo.Source?.Code} (Arr: {trainInfo.Source?.Arrival})
-          </p>
-          <p>
-            <strong>To:</strong> {trainInfo.Destination?.Code} (Arr: {trainInfo.Destination?.Arrival})
-          </p>
-        </div>
-      )}
+  {trainInfo && (
+    <div className="mt-6 p-4 bg-white text-black rounded-md shadow-md">
+      <h3 className="text-xl font-bold mb-2">
+        {trainInfo.TrainName} ({trainInfo.TrainNo})
+      </h3>
+      <p>
+        <strong>From:</strong> {trainInfo.Source?.Code} (Arr: {trainInfo.Source?.Arrival})
+      </p>
+      <p>
+        <strong>To:</strong> {trainInfo.Destination?.Code} (Arr: {trainInfo.Destination?.Arrival})
+      </p>
     </div>
+  )}
+</div>
+
   );
 };
 
